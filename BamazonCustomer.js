@@ -7,6 +7,7 @@ var connection = mysql.createConnection({
     password: '',
     database: 'Bamazon'
 })
+var next = false;
 var id;
 var units;
 var stockQuantity;
@@ -23,37 +24,54 @@ inquirer.prompt([
 		message: "Product ID?",
 		name: "ProductID"
 	},
-	{
-		type: "input",
-		message: "How many units?",
-		name: "Units"
-	} 
+	
 ]).then(function (answer) {
 	console.log(answer.ProductID);
-	console.log(answer.Units);
-
 	id = answer.ProductID;
-	units = parseInt(answer.Units);
 	if(id){
 		productByID();
+		next = true;
 	}
-	if(units&&stockQuantity){
-		stockChecker();
+	if(next === true){
+	howManyUnits();	
 	}
 });
 
 
-function productByID(){
+var howManyUnits = function(){
+inquirer.prompt([	
+		{
+		type: "input",
+		message: "How many units?",
+		name: "Units"
+		} 	
+]).then(function(answer){
+	units = parseInt(answer.Units);
+	stockChecker();
+});
+}
+
+// SHOWS ITEM AND QUANTITY BY ID
+var productByID = function(){
 connection.query('SELECT*FROM Products WHERE ItemID=?',id, function(err,res){
 		console.log('ProductName: '+res[0].ProductName);
 		console.log('Quantity: '+res[0].StockQuantity);
 		stockQuantity = res[0].StockQuantity;
 	})
 };
+
+// UPDATES STOCK
 function stockChecker(){
 	if(units>stockQuantity){
 		console.log('Not enough stock!!!');
 	}else{
-		console.log('UPDATE TABLE');
+		stockQuantity-=units;
+		connection.query("UPDATE products SET ? WHERE ?", [{
+    	StockQuantity: stockQuantity
+		}, {
+    	ItemID: id
+	}], function(err, res) {
+		console.log(stockQuantity);
+	});		
 	}
 };
