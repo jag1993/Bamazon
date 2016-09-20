@@ -13,6 +13,7 @@ var amount;
 var addMoreSwitch = false;
 var stockQuantity;
 var amountToAdd;
+var deptArray = [];
 
 inquirer.prompt([
 	{
@@ -55,7 +56,7 @@ connection.query('SELECT ItemID,ProductName,StockQuantity FROM Products WHERE St
 	}
 });
 }
-// If a manager selects Add to Inventory, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+
 var addMoreIDPrompt = function(){
 	inquirer.prompt([
 	{
@@ -104,9 +105,6 @@ var addMoreQuantityPrompt = function(){
 }
 
 
-
-
-
 var addNewProduct = function(){
 
 	inquirer.prompt([
@@ -116,9 +114,10 @@ var addNewProduct = function(){
 		name: "productName"
 	},
 	{
-		type: "input",
+		type: "list",
 		message: "Department Name? \n",
-		name: "departmentName"
+		name: "departmentName",
+		choices: deptArray
 	},
 	{
 		type: "input",
@@ -141,14 +140,18 @@ var addNewProduct = function(){
             console.log("You have added item");
         });
 })
-
 }
 
+var departmentArrays = function(){
+ connection.query('SELECT DepartmentName FROM Products GROUP BY DepartmentName HAVING count(*) >= 1' , function(err, res) {
+           for(i=0;i<res.length;i++){
+          
+           var departments = res[i].DepartmentName;
+        	 deptArray.push(departments); 
+        
+            }
+        });
+};
+departmentArrays();
 
 
-
-
-
-
-
-// If a manager selects Add New Product, it should allow the manager to add a completely new product to the store.
