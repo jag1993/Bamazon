@@ -12,16 +12,11 @@ var id;
 var units;
 var stockQuantity;
 
-connection.connect(function(err) {
-    if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-})
-
 
 inquirer.prompt([
 	{
 		type: "input",
-		message: "Product ID?",
+		message: "\n Product ID?",
 		name: "ProductID"
 	},
 	
@@ -54,8 +49,7 @@ inquirer.prompt([
 // SHOWS ITEM AND QUANTITY BY ID
 var productByID = function(){
 connection.query('SELECT*FROM Products WHERE ItemID=?',id, function(err,res){
-		console.log('ProductName: '+res[0].ProductName);
-		console.log('Quantity: '+res[0].StockQuantity);
+		console.log('ProductName: '+res[0].ProductName +' '+' Quantity: '+res[0].StockQuantity);
 		stockQuantity = res[0].StockQuantity;
 	})
 };
@@ -71,7 +65,8 @@ function stockChecker(){
 		}, {
     	ItemID: id
 	}], function(err, res) {
-		console.log(stockQuantity);
+		console.log('You bought ' + units + ' unit/s');
+		console.log(stockQuantity + ' units left')
 	});		
 	}
 };
