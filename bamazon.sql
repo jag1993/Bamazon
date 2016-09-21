@@ -28,10 +28,13 @@ INSERT INTO Products (ProductName,DepartmentName,Price,StockQuantity) VALUES ('O
 INSERT INTO Products (ProductName,DepartmentName,Price,StockQuantity) VALUES ('Hand Blender','Appliances',80,3);
 INSERT INTO Products (ProductName,DepartmentName,Price,StockQuantity) VALUES ('Stereo','Appliances',750,35);
 
-SELECT * FROM Products;
-
 ALTER TABLE Products
 ADD TotalSales DECIMAL(50,2) NOT NULL DEFAULT 0.00;
+
+
+SELECT * FROM Products;
+
+
 
 CREATE TABLE Departments(
   DepartmentID INT NOT NULL AUTO_INCREMENT,
@@ -40,7 +43,10 @@ CREATE TABLE Departments(
   TotalSales INT(100) NOT NULL DEFAULT 0,
   PRIMARY KEY (`DepartmentID`)
 );
+
 INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Appliances',50000,0.00);
 INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Food/Beverage',50000,0.00);
 INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Furniture',50000,0.00);
 INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Mobile',50000,0.00);
+
+SELECT * FROM Departments;
