@@ -44,9 +44,9 @@ CREATE TABLE Departments(
   PRIMARY KEY (`DepartmentID`)
 );
 
-INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Appliances',50000,0.00);
-INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Food/Beverage',50000,0.00);
-INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Furniture',50000,0.00);
-INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Mobile',50000,0.00);
+INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Appliances',-50000,0.00);
+INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Food/Beverage',-50000,0.00);
+INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Furniture',-50000,0.00);
+INSERT INTO Departments (DepartmentName,OverHeadCosts,TotalSales) VALUES ('Mobile',-50000,0.00);
 
 SELECT * FROM Departments;
