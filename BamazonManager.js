@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+var consoletable = require('console.table');
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -43,17 +44,13 @@ inquirer.prompt([
 var showProducts = function(){
 connection.query('SELECT * FROM Products', function(err, res) {
     if (err) throw err;
-  for(i=0;i<res.length;i++){
-    console.log('ID: ' + res[i].ItemID+'||' +'PRODUCT NAME: ' +res[i].ProductName+'||'+'PRICE: ' +'$'+res[i].Price+ '||'+ 'STOCK QUANTITY: ' +res[i].StockQuantity);
-    }
+  console.table(res);
 });
 }
 
 var viewLowInventory = function(){
 connection.query('SELECT ItemID,ProductName,StockQuantity FROM Products WHERE StockQuantity <= 5', function(err,res){
- for(i=0;i<res.length;i++){
-	console.log('ID: ' + res[i].ItemID+'||' +'PRODUCT NAME: ' +res[i].ProductName+'||'+ 'STOCK QUANTITY: ' +res[i].StockQuantity);
-	}
+	console.table(res);
 });
 }
 
