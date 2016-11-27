@@ -1,6 +1,11 @@
 # Bamazon
 
 ## Youtube link: https://youtu.be/6kcbio5duo0
+> Bamazon is a command line application that interacts with a database with queries based on user input
 
->In my project I made the overhead costs negative because I considered it as a deduction to the business owner's capital. If the company does not sell enough to break even, the company will have negative profit.
-> Also, the -50,000 value is just a dummy value and in the schema TotalSales is set to 0.00 before the Inner Join in the BamazonExecutive.js file is executed.
+## Instructions
+> 1. There are 3 files that a user can run (BamazonCustomer, BamazonExecutive, and BamazonManager)
+> 2. Please refer to the video above for each level
+
+## Technologies Used
+> 1. Node.js (NPM Packages: inquirer, install, mysql)
